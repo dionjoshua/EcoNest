@@ -1,0 +1,520 @@
+package com.econest.view;
+
+import com.econest.model.Product;
+import com.econest.model.ProductCategory;
+import com.econest.view.components.*;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.StyleContext;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class ProductPanel {
+    private JPanel rootPanel;
+    private JTextField txtSearch;
+    private JComboBox cmbFilter;
+    private JPanel cardTable;
+    private JTable tblProducts;
+    private JPanel cardForm;
+    private JLabel lblFormTitle;
+    private JTextField txtName;
+    private JComboBox cmbCategory;
+    private JTextField txtPrice;
+    private JComboBox cmbEcoRating;
+    private JLabel lblSpec;
+    private JTextField txtSpec;
+    private JTextField txtDescription;
+    private JTextField txtQuantity;
+    private JTextField txtReorderLevel;
+    private JButton btnAdd;
+    private JButton btnUpdate;
+    private JButton btnRemove;
+    private JButton btnClear;
+
+    private final DefaultTableModel model = Theme.tableModel("Name", "Category", "Price (Rs.)", "Eco-rating", "Stock", "Reorder");
+    private List<Product> rows = new ArrayList<>();
+
+    public ProductPanel() {
+        tblProducts.setModel(model);
+        Theme.styleTable(tblProducts);
+        Theme.columnWidths(tblProducts, 190, 115, 90, 95, 55, 65);
+        Theme.rightAlign(tblProducts, 2);
+        tblProducts.getColumnModel().getColumn(3).setCellRenderer(new EcoRatingRenderer());
+
+        for (ProductCategory category : ProductCategory.values()) {
+            cmbCategory.addItem(category);
+        }
+        // the label of the extra field depends on the type of product
+        cmbCategory.addActionListener(e -> lblSpec.setText(Product.create(getCategory()).getSpecLabel()));
+        clearForm();
+    }
+
+    private void createUIComponents() {
+        cardTable = new RoundedPanel();
+        cardForm = new RoundedPanel();
+    }
+
+    public void showProducts(List<Product> products) {
+        rows = products;
+        model.setRowCount(0);
+        for (Product p : products) {
+            model.addRow(new Object[]{p.getName(), p.getCategory(), String.format("%,.2f", p.getPrice()),
+                    p.getEcoRating(), p.getQuantity(), p.getReorderLevel()});
+        }
+    }
+
+    public Product getSelectedProduct() {
+        int row = tblProducts.getSelectedRow();
+        return row >= 0 && row < rows.size() ? rows.get(row) : null;
+    }
+
+    public void fillForm(Product p) {
+        lblFormTitle.setText("Edit product");
+        txtName.setText(p.getName());
+        cmbCategory.setSelectedItem(p.getCategory());
+        txtPrice.setText(String.valueOf(p.getPrice()));
+        cmbEcoRating.setSelectedItem(String.valueOf(p.getEcoRating()));
+        txtSpec.setText(p.getSpec());
+        txtDescription.setText(p.getDescription());
+        txtQuantity.setText(String.valueOf(p.getQuantity()));
+        txtQuantity.setEnabled(false);   // stock is changed from the Inventory screen
+        txtReorderLevel.setText(String.valueOf(p.getReorderLevel()));
+        btnAdd.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        btnRemove.setEnabled(true);
+    }
+
+    public void clearForm() {
+        lblFormTitle.setText("New product");
+        txtName.setText("");
+        cmbCategory.setSelectedIndex(0);
+        txtPrice.setText("");
+        cmbEcoRating.setSelectedIndex(2);
+        txtSpec.setText("");
+        txtDescription.setText("");
+        txtQuantity.setText("0");
+        txtQuantity.setEnabled(true);
+        txtReorderLevel.setText("5");
+        tblProducts.clearSelection();
+        btnAdd.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnRemove.setEnabled(false);
+    }
+
+    public ProductCategory getCategory() {
+        return (ProductCategory) cmbCategory.getSelectedItem();
+    }
+
+    public int getEcoRating() {
+        return Integer.parseInt((String) cmbEcoRating.getSelectedItem());
+    }
+
+    public JPanel getRootPanel() { return rootPanel; }
+    public JTable getTblProducts() { return tblProducts; }
+    public JTextField getTxtSearch() { return txtSearch; }
+    public JComboBox getCmbFilter() { return cmbFilter; }
+    public JTextField getTxtName() { return txtName; }
+    public JTextField getTxtPrice() { return txtPrice; }
+    public JTextField getTxtSpec() { return txtSpec; }
+    public JTextField getTxtDescription() { return txtDescription; }
+    public JTextField getTxtQuantity() { return txtQuantity; }
+    public JTextField getTxtReorderLevel() { return txtReorderLevel; }
+    public JButton getBtnAdd() { return btnAdd; }
+    public JButton getBtnUpdate() { return btnUpdate; }
+    public JButton getBtnRemove() { return btnRemove; }
+    public JButton getBtnClear() { return btnClear; }
+
+    {
+// GUI initializer generated by IntelliJ IDEA GUI Designer
+// >>> IMPORTANT!! <<<
+// DO NOT EDIT OR ADD ANY CODE HERE!
+        $$$setupUI$$$();
+    }
+
+    /**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * >>> IMPORTANT!! <<<
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */
+    private void $$$setupUI$$$() {
+        createUIComponents();
+        rootPanel = new JPanel();
+        rootPanel.setLayout(new BorderLayout(0, 0));
+        rootPanel.setBackground(new Color(-527378));
+        rootPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(20, 22, 20, 22), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new BorderLayout(0, 0));
+        panel1.setOpaque(false);
+        rootPanel.add(panel1, BorderLayout.NORTH);
+        panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(0, 0, 16, 0), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        final JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridBagLayout());
+        panel2.setOpaque(false);
+        panel1.add(panel2, BorderLayout.WEST);
+        final JLabel label1 = new JLabel();
+        label1.setText("Product Catalogue");
+        label1.setForeground(new Color(-14018019));
+        Font label1Font = this.$$$getFont$$$(null, Font.BOLD, 22, label1.getFont());
+        if (label1Font != null) label1.setFont(label1Font);
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        panel2.add(label1, gbc);
+        final JLabel label2 = new JLabel();
+        label2.setText("Plants, planters and gardening kits");
+        label2.setForeground(new Color(-7570572));
+        Font label2Font = this.$$$getFont$$$(null, -1, 12, label2.getFont());
+        if (label2Font != null) label2.setFont(label2Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(2, 0, 0, 0);
+        panel2.add(label2, gbc);
+        final JPanel panel3 = new JPanel();
+        panel3.setLayout(new FlowLayout(FlowLayout.RIGHT, 8, 6));
+        panel3.setOpaque(false);
+        panel1.add(panel3, BorderLayout.EAST);
+        final JLabel label3 = new JLabel();
+        label3.setText("Search");
+        label3.setForeground(new Color(-7570572));
+        Font label3Font = this.$$$getFont$$$(null, -1, 12, label3.getFont());
+        if (label3Font != null) label3.setFont(label3Font);
+        panel3.add(label3);
+        txtSearch = new JTextField();
+        txtSearch.setColumns(16);
+        panel3.add(txtSearch);
+        cmbFilter = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        defaultComboBoxModel1.addElement("All categories");
+        defaultComboBoxModel1.addElement("Plant");
+        defaultComboBoxModel1.addElement("Planter");
+        defaultComboBoxModel1.addElement("Gardening Kit");
+        cmbFilter.setModel(defaultComboBoxModel1);
+        panel3.add(cmbFilter);
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new BorderLayout(16, 0));
+        panel4.setOpaque(false);
+        rootPanel.add(panel4, BorderLayout.CENTER);
+        cardTable.setLayout(new BorderLayout(0, 0));
+        cardTable.setOpaque(false);
+        panel4.add(cardTable, BorderLayout.CENTER);
+        cardTable.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        final JScrollPane scrollPane1 = new JScrollPane();
+        cardTable.add(scrollPane1, BorderLayout.CENTER);
+        tblProducts = new JTable();
+        scrollPane1.setViewportView(tblProducts);
+        cardForm.setLayout(new GridBagLayout());
+        cardForm.setOpaque(false);
+        cardForm.setPreferredSize(new Dimension(292, -1));
+        panel4.add(cardForm, BorderLayout.EAST);
+        cardForm.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(18, 18, 18, 18), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        lblFormTitle = new JLabel();
+        lblFormTitle.setText("Product details");
+        lblFormTitle.setForeground(new Color(-14018019));
+        Font lblFormTitleFont = this.$$$getFont$$$(null, Font.BOLD, 15, lblFormTitle.getFont());
+        if (lblFormTitleFont != null) lblFormTitle.setFont(lblFormTitleFont);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0, 0, 8, 0);
+        cardForm.add(lblFormTitle, gbc);
+        final JLabel label4 = new JLabel();
+        label4.setText("Product name");
+        label4.setForeground(new Color(-7570572));
+        Font label4Font = this.$$$getFont$$$(null, -1, 12, label4.getFont());
+        if (label4Font != null) label4.setFont(label4Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(label4, gbc);
+        txtName = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(txtName, gbc);
+        final JLabel label5 = new JLabel();
+        label5.setText("Category");
+        label5.setForeground(new Color(-7570572));
+        Font label5Font = this.$$$getFont$$$(null, -1, 12, label5.getFont());
+        if (label5Font != null) label5.setFont(label5Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(label5, gbc);
+        cmbCategory = new JComboBox();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(cmbCategory, gbc);
+        final JLabel label6 = new JLabel();
+        label6.setText("Price (Rs.)");
+        label6.setForeground(new Color(-7570572));
+        Font label6Font = this.$$$getFont$$$(null, -1, 12, label6.getFont());
+        if (label6Font != null) label6.setFont(label6Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(label6, gbc);
+        txtPrice = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(txtPrice, gbc);
+        final JLabel label7 = new JLabel();
+        label7.setText("Eco-rating (1 = low, 5 = best)");
+        label7.setForeground(new Color(-7570572));
+        Font label7Font = this.$$$getFont$$$(null, -1, 12, label7.getFont());
+        if (label7Font != null) label7.setFont(label7Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(label7, gbc);
+        cmbEcoRating = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
+        defaultComboBoxModel2.addElement("1");
+        defaultComboBoxModel2.addElement("2");
+        defaultComboBoxModel2.addElement("3");
+        defaultComboBoxModel2.addElement("4");
+        defaultComboBoxModel2.addElement("5");
+        cmbEcoRating.setModel(defaultComboBoxModel2);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(cmbEcoRating, gbc);
+        lblSpec = new JLabel();
+        lblSpec.setText("Light needs");
+        lblSpec.setForeground(new Color(-7570572));
+        Font lblSpecFont = this.$$$getFont$$$(null, -1, 12, lblSpec.getFont());
+        if (lblSpecFont != null) lblSpec.setFont(lblSpecFont);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(lblSpec, gbc);
+        txtSpec = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 10;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(txtSpec, gbc);
+        final JLabel label8 = new JLabel();
+        label8.setText("Description");
+        label8.setForeground(new Color(-7570572));
+        Font label8Font = this.$$$getFont$$$(null, -1, 12, label8.getFont());
+        if (label8Font != null) label8.setFont(label8Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 11;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(label8, gbc);
+        txtDescription = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 12;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(txtDescription, gbc);
+        final JLabel label9 = new JLabel();
+        label9.setText("Opening quantity");
+        label9.setForeground(new Color(-7570572));
+        Font label9Font = this.$$$getFont$$$(null, -1, 12, label9.getFont());
+        if (label9Font != null) label9.setFont(label9Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 13;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(label9, gbc);
+        txtQuantity = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 14;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(txtQuantity, gbc);
+        final JLabel label10 = new JLabel();
+        label10.setText("Reorder level");
+        label10.setForeground(new Color(-7570572));
+        Font label10Font = this.$$$getFont$$$(null, -1, 12, label10.getFont());
+        if (label10Font != null) label10.setFont(label10Font);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 15;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 0, 3, 0);
+        cardForm.add(label10, gbc);
+        txtReorderLevel = new JTextField();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 16;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        cardForm.add(txtReorderLevel, gbc);
+        btnAdd = new JButton();
+        btnAdd.setText("Add");
+        btnAdd.setBackground(new Color(-12451305));
+        btnAdd.setForeground(new Color(-1));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 17;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(18, 0, 0, 4);
+        cardForm.add(btnAdd, gbc);
+        btnUpdate = new JButton();
+        btnUpdate.setText("Update");
+        btnUpdate.setBackground(new Color(-12451305));
+        btnUpdate.setForeground(new Color(-1));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 17;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(18, 4, 0, 0);
+        cardForm.add(btnUpdate, gbc);
+        btnRemove = new JButton();
+        btnRemove.setText("Remove");
+        btnRemove.setBackground(new Color(-6078161));
+        btnRemove.setForeground(new Color(-1));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 18;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(8, 0, 0, 4);
+        cardForm.add(btnRemove, gbc);
+        btnClear = new JButton();
+        btnClear.setText("Clear");
+        btnClear.setBackground(new Color(-1054753));
+        btnClear.setForeground(new Color(-14018019));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 18;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(8, 4, 0, 0);
+        cardForm.add(btnClear, gbc);
+        final JPanel panel5 = new JPanel();
+        panel5.setLayout(new BorderLayout(0, 0));
+        panel5.setOpaque(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 19;
+        gbc.gridwidth = 2;
+        gbc.weighty = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.BOTH;
+        cardForm.add(panel5, gbc);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    public JComponent $$$getRootComponent$$$() {
+        return rootPanel;
+    }
+
+}

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.econest.view.ReportPanel">
+  <grid id="30750" binding="rootPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="980" height="660"/>
+    </constraints>
+    <properties>
+      <background color="-527378"/>
+    </properties>
+    <border type="empty">
+      <size top="20" left="22" bottom="20" right="22"/>
+    </border>
+    <children>
+      <grid id="d3ed7" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties>
+          <opaque value="false"/>
+        </properties>
+        <border type="empty">
+          <size top="0" left="0" bottom="16" right="0"/>
+        </border>
+        <children>
+          <grid id="1253d" layout-manager="GridBagLayout">
+            <constraints border-constraint="West"/>
+            <properties>
+              <opaque value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="fa8d2" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="Reports"/>
+                  <foreground color="-14018019"/>
+                  <font size="22" style="1"/>
+                </properties>
+              </component>
+              <component id="230e4" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag top="2" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <text value="Monthly sales and inventory"/>
+                  <foreground color="-7570572"/>
+                  <font size="12"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="94117" layout-manager="FlowLayout" hgap="8" vgap="6" flow-align="2">
+            <constraints border-constraint="East"/>
+            <properties>
+              <opaque value="false"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="6e749" class="javax.swing.JComboBox" binding="cmbMonth">
+                <constraints/>
+                <properties>
+                  <model>
+                    <item value="January"/>
+                    <item value="February"/>
+                    <item value="March"/>
+                    <item value="April"/>
+                    <item value="May"/>
+                    <item value="June"/>
+                    <item value="July"/>
+                    <item value="August"/>
+                    <item value="September"/>
+                    <item value="October"/>
+                    <item value="November"/>
+                    <item value="December"/>
+                  </model>
+                </properties>
+              </component>
+              <component id="b148a" class="javax.swing.JComboBox" binding="cmbYear">
+                <constraints/>
+                <properties/>
+              </component>
+              <component id="0ba2e" class="javax.swing.JButton" binding="btnGenerate">
+                <constraints/>
+                <properties>
+                  <text value="Generate"/>
+                  <background color="-12451305"/>
+                  <foreground color="-1"/>
+                </properties>
+              </component>
+              <component id="4410f" class="javax.swing.JButton" binding="btnExport">
+                <constraints/>
+                <properties>
+                  <text value="Export to file"/>
+                  <background color="-1054753"/>
+                  <foreground color="-14018019"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <tabbedpane id="60187" binding="tabs">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="45b28" layout-manager="GridBagLayout">
+            <constraints>
+              <tabbedpane title="Monthly sales"/>
+            </constraints>
+            <properties>
+              <background color="-527378"/>
+            </properties>
+            <border type="empty">
+              <size top="14" left="0" bottom="0" right="0"/>
+            </border>
+            <children>
+              <grid id="15618" binding="cardSalesRevenue" custom-create="true" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="0" bottom="12" right="7" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="14" left="14" bottom="14" right="14"/>
+                </border>
+                <children>
+                  <component id="b8172" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="Revenue"/>
+                      <foreground color="-7570572"/>
+                      <font size="12"/>
+                    </properties>
+                  </component>
+                  <component id="4388a" class="javax.swing.JLabel" binding="lblSalesRevenue">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag top="4" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="-"/>
+                      <foreground color="-14018019"/>
+                      <font size="20" style="1"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="b9c2a" binding="cardSalesOrders" custom-create="true" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="7" bottom="12" right="7" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="14" left="14" bottom="14" right="14"/>
+                </border>
+                <children>
+                  <component id="96012" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="Orders"/>
+                      <foreground color="-7570572"/>
+                      <font size="12"/>
+                    </properties>
+                  </component>
+                  <component id="6d3c4" class="javax.swing.JLabel" binding="lblSalesOrders">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag top="4" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="-"/>
+                      <foreground color="-14018019"/>
+                      <font size="20" style="1"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="32727" binding="cardSalesAverage" custom-create="true" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="7" bottom="12" right="0" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="14" left="14" bottom="14" right="14"/>
+                </border>
+                <children>
+                  <component id="f630c" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="Average order value"/>
+                      <foreground color="-7570572"/>
+                      <font size="12"/>
+                    </properties>
+                  </component>
+                  <component id="84a96" class="javax.swing.JLabel" binding="lblSalesAverage">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag top="4" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="-"/>
+                      <foreground color="-14018019"/>
+                      <font size="20" style="1"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="9c611" binding="cardProductSales" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="8">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="0" bottom="12" right="0" weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="12" left="12" bottom="12" right="12"/>
+                </border>
+                <children>
+                  <component id="72742" class="javax.swing.JLabel">
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <text value="Sales by product"/>
+                      <foreground color="-14018019"/>
+                      <font size="13" style="1"/>
+                    </properties>
+                  </component>
+                  <scrollpane id="a6b8c">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="fd0f2" class="javax.swing.JTable" binding="tblProductSales">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="a8203" binding="cardMonthOrders" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="8">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="12" left="12" bottom="12" right="12"/>
+                </border>
+                <children>
+                  <component id="0bdb7" class="javax.swing.JLabel">
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <text value="Orders in this month"/>
+                      <foreground color="-14018019"/>
+                      <font size="13" style="1"/>
+                    </properties>
+                  </component>
+                  <scrollpane id="afd85">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="99911" class="javax.swing.JTable" binding="tblMonthOrders">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="3bd21" layout-manager="GridBagLayout">
+            <constraints>
+              <tabbedpane title="Inventory"/>
+            </constraints>
+            <properties>
+              <background color="-527378"/>
+            </properties>
+            <border type="empty">
+              <size top="14" left="0" bottom="0" right="0"/>
+            </border>
+            <children>
+              <grid id="19a1f" binding="cardInvItems" custom-create="true" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="0" bottom="12" right="7" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="14" left="14" bottom="14" right="14"/>
+                </border>
+                <children>
+                  <component id="c2db0" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="Products in catalogue"/>
+                      <foreground color="-7570572"/>
+                      <font size="12"/>
+                    </properties>
+                  </component>
+                  <component id="65173" class="javax.swing.JLabel" binding="lblInvItems">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag top="4" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="-"/>
+                      <foreground color="-14018019"/>
+                      <font size="20" style="1"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="f0fc7" binding="cardInvValue" custom-create="true" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="7" bottom="12" right="7" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="14" left="14" bottom="14" right="14"/>
+                </border>
+                <children>
+                  <component id="359eb" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="Stock value"/>
+                      <foreground color="-7570572"/>
+                      <font size="12"/>
+                    </properties>
+                  </component>
+                  <component id="0313c" class="javax.swing.JLabel" binding="lblInvValue">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag top="4" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="-"/>
+                      <foreground color="-14018019"/>
+                      <font size="20" style="1"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="5b368" binding="cardInvLow" custom-create="true" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag top="0" left="7" bottom="12" right="0" weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="14" left="14" bottom="14" right="14"/>
+                </border>
+                <children>
+                  <component id="ccb13" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="Low stock alerts"/>
+                      <foreground color="-7570572"/>
+                      <font size="12"/>
+                    </properties>
+                  </component>
+                  <component id="deeba" class="javax.swing.JLabel" binding="lblInvLow">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                      <gridbag top="4" left="0" bottom="0" right="0" weightx="1.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <text value="-"/>
+                      <foreground color="-14018019"/>
+                      <font size="20" style="1"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="e9aef" binding="cardInventory" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="8">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <opaque value="false"/>
+                </properties>
+                <border type="empty">
+                  <size top="12" left="12" bottom="12" right="12"/>
+                </border>
+                <children>
+                  <component id="20bdd" class="javax.swing.JLabel">
+                    <constraints border-constraint="North"/>
+                    <properties>
+                      <text value="Inventory status"/>
+                      <foreground color="-14018019"/>
+                      <font size="13" style="1"/>
+                    </properties>
+                  </component>
+                  <scrollpane id="0829a">
+                    <constraints border-constraint="Center"/>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <component id="34054" class="javax.swing.JTable" binding="tblInventory">
+                        <constraints/>
+                        <properties/>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </tabbedpane>
+    </children>
+  </grid>
+</form>
